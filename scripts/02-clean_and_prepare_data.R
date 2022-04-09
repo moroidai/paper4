@@ -9,9 +9,10 @@ raw_data <-
 read_csv(file = "raw_data.csv",
          show_col_types = FALSE)
 
+
 ## clean the data ##
 
-
+## 01-gather_data.R must have been done already ##
 
 data <-
   raw_data[[1]] |>
@@ -117,7 +118,7 @@ data_education <-
   data_education |>
   separate(
     col = grp,
-    into = c("region", "own_land", "rented_land", "someone_elses_land", "prof_tech", "mgmt_admin", "clerical", "sales", "services", "industrial", "total", "number_of_women"),
+    into = c("education", "own_land", "rented_land", "someone_elses_land", "prof_tech", "mgmt_admin", "clerical", "sales", "services", "industrial", "total", "number_of_women"),
     sep = "\\s") |>
   mutate(across(own_land:number_of_women, as.numeric))
 
@@ -135,7 +136,78 @@ data_total <-
   data_total |>
   separate(
     col = grp,
-    into = c("region", "own_land", "rented_land", "someone_elses_land", "prof_tech", "mgmt_admin", "clerical", "sales", "services", "industrial", "total", "number_of_women"),
+    into = c("total", "own_land", "rented_land", "someone_elses_land", "prof_tech", "mgmt_admin", "clerical", "sales", "services", "industrial", "total", "number_of_women"),
     sep = "\\s") |>
   mutate(across(own_land:number_of_women, as.numeric))
 
+
+### Conduct tests ###
+
+## 00-simulation.R must have been done already ##
+
+library(pointblank)
+
+agent <-
+  create_agent(tbl = tested_data) |>
+  col_is_character(columns = vars(age)) |>
+  col_is_integer(columns = vars(own_land, rented_land, someone_elses_land, prof_tech, mgmt_admin, clerical, sales, services, industrial,  number_of_women)) |>
+  rows_complete() |>
+  interrogate()
+
+# Test data about age #
+
+tested_data <- data_age
+
+agent #check if the data pass all the steps
+
+# test data about residence #
+
+tested_data <- data_residence
+
+agent <-
+  create_agent(tbl = tested_data) |>
+  col_is_character(columns = vars(residence)) |>
+  col_is_integer(columns = vars(own_land, rented_land, someone_elses_land, prof_tech, mgmt_admin, clerical, sales, services, industrial,  number_of_women)) |>
+  rows_complete() |>
+  interrogate()
+
+agent #check if the data pass all the steps
+
+# test data about region #
+
+tested_data <- data_region
+
+agent <-
+  create_agent(tbl = tested_data) |>
+  col_is_character(columns = vars(region)) |>
+  col_is_integer(columns = vars(own_land, rented_land, someone_elses_land, prof_tech, mgmt_admin, clerical, sales, services, industrial,  number_of_women)) |>
+  rows_complete() |>
+  interrogate()
+
+agent #check if the data pass all the steps
+
+# test data about education #
+
+tested_data <- data_education
+
+agent <-
+  create_agent(tbl = tested_data) |>
+  col_is_character(columns = vars(education)) |>
+  col_is_integer(columns = vars(own_land, rented_land, someone_elses_land, prof_tech, mgmt_admin, clerical, sales, services, industrial,  number_of_women)) |>
+  rows_complete() |>
+  interrogate()
+
+agent #check if the data pass all the steps
+
+# test data about total #
+
+tested_data <- data_total
+
+agent <-
+  create_agent(tbl = tested_data) |>
+  col_is_character(columns = vars(total)) |>
+  col_is_integer(columns = vars(own_land, rented_land, someone_elses_land, prof_tech, mgmt_admin, clerical, sales, services, industrial,  number_of_women)) |>
+  rows_complete() |>
+  interrogate()
+
+agent #check if the data pass all the steps

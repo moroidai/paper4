@@ -75,6 +75,18 @@ simulated_data_education <-
 
 
 ## Test ##
+library(pointblank)
 
+tested_data <- simulated_data_age
 
+agent <-
+create_agent(tbl = tested_data) |>
+  col_is_character(columns = vars(age)) |>
+  col_is_integer(columns = vars(own_land, rented_land, someone_elses_land, prof_tech, mgmt_admin, clerical, sales, services, industrial,  number_of_women)) |>
+  rows_complete() |>
+  interrogate()
+
+agent
+
+  
 
