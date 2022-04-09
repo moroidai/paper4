@@ -97,6 +97,15 @@ data_region <-
     sep = "\\s") |>
   mutate(across(own_land:number_of_women, as.numeric))
 
+# rename some data #
+data_region[1,1] <- "java_bali"
+data_region[2,1] <- "java_bali_urban"
+data_region[3,1] <- "java_bali_rural"
+data_region[5,1] <- "outer_java_bali_1_urban"
+data_region[6,1] <- "outer_java_bali_1_rural"
+data_region[8,1] <- "outer_java_bali_2_urban"
+data_region[9,1] <- "outer_java_bali_2_rural"
+
 # Extract data about education #
 
 data_education <-
