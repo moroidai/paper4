@@ -140,6 +140,22 @@ data_total <-
     sep = "\\s") |>
   mutate(across(own_land:number_of_women, as.numeric))
 
+### Cleaning finished ###
+
+### Save the data ###
+
+write_csv(data_age,
+          file = "cleaned_data_age.csv")
+write_csv(data_region,
+          file = "cleaned_data_region.csv")
+write_csv(data_residence,
+          file = "cleaned_data_residence.csv")
+write_csv(data_education,
+          file = "cleaned_data_education.csv")
+write_csv(data_total,
+          file = "cleaned_data_total.csv")
+
+
 
 ### Conduct tests ###
 
