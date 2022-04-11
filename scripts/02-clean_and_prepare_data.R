@@ -145,7 +145,7 @@ data_total <-
   data_total |>
   separate(
     col = grp,
-    into = c("total", "own_land", "rented_land", "someone_elses_land", "prof_tech", "mgmt_admin", "clerical", "sales", "services", "industrial", "total", "number_of_women"),
+    into = c("variable", "own_land", "rented_land", "someone_elses_land", "prof_tech", "mgmt_admin", "clerical", "sales", "services", "industrial", "total", "number_of_women"),
     sep = "\\s") |>
   mutate(across(own_land:number_of_women, as.numeric))
 
